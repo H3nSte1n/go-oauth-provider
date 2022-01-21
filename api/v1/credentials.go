@@ -8,6 +8,7 @@ import (
 	"oauth_provider/models"
 	"oauth_provider/db"
 	"oauth_provider/utils"
+	"time"
 )
 
 type ScopeList struct {
@@ -27,10 +28,12 @@ func CreateCredentials(c *gin.Context) {
 
 	convertedScopes := utils.ConvertToInterfaceArray[models.Scope](scopes.Scopes)
 	scopeIds, _ := db.CreateScopes(convertedScopes)
+	currentTime := time.Now()
 	credential := models.Credential{
 		ClientId:     clientId,
 		ClientSecret: clientSecret,
 		ScopeIDs:     scopeIds,
+		CreatedAt:    &currentTime,
 	}
 	
 	db.CreateCredential(&credential)
