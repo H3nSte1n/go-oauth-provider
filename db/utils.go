@@ -4,6 +4,8 @@ import (
 	"log"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/bson"
+
+	"oauth_provider/utils"
 )
 
 //Create creating a task in a mongo or document db
@@ -20,6 +22,22 @@ func Create[T any](object T, model string) (primitive.ObjectID, error) {
 
 	oid := result.InsertedID.(primitive.ObjectID)
 	return oid, nil
+}
+
+func CreateMany(objects []interface{}, model string) ([]primitive.ObjectID, error) {
+	client, ctx, cancel := getConnection()
+	defer cancel()
+	defer client.Disconnect(ctx)
+
+	result, err := client.Database(model).Collection(model).InsertMany(ctx, objects)
+	if err != nil {
+		log.Printf("Could not create %q: %v", model, err)
+		return nil, err
+	}
+
+	oids := result.InsertedIDs
+	convertedOIDs := utils.ConvertArrayToAnotherType[primitive.ObjectID](oids)
+	return convertedOIDs, nil
 }
 
 //Create creating a task in a mongo or document db

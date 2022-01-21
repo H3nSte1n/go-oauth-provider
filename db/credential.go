@@ -8,7 +8,6 @@ import (
 
 var MODEL = "credentials"
 
-//Create creating a task in a mongo or document db
 func CreateCredential(credential *models.Credential) (primitive.ObjectID, error) {
 	credential.ID = primitive.NewObjectID()
 	return Create[*models.Credential](credential, MODEL)

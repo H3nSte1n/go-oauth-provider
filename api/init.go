@@ -8,7 +8,7 @@ import (
 
 func Init() {
 	r := gin.Default()
-	r.GET("/credential", v1.CreateCredential)
+	r.POST("/credentials", v1.CreateCredentials)
 	r.GET("/credentials", v1.GetCredentials)
 
 	r.Run(":5002")
