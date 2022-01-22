@@ -75,3 +75,17 @@ func Get[T any](model string, id primitive.ObjectID) (T, error) {
 
 	return res, nil
 }
+
+func Update[T any](model string, id primitive.ObjectID, object T) (primitive.ObjectID, error) {
+	client, ctx, cancel := getConnection()
+	defer cancel()
+	defer client.Disconnect(ctx)
+
+	
+	if result := client.Database(model).Collection(model).FindOneAndUpdate(ctx, bson.D{{"_id", id}}, bson.D{{"$set", object}}); result.Err() != nil {
+		log.Printf("Could not update %q: %v", model, result.Err())
+		return primitive.NilObjectID, result.Err()
+	}
+
+	return id, nil
+}
