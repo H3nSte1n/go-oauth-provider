@@ -24,3 +24,11 @@ func GetScopes() ([]models.Scope, error) {
 func GetScope(id primitive.ObjectID) (models.Scope, error) {
 	return Get[models.Scope](SCOPE_MODEL, id)
 }
+
+func ScopesFindByName(name string) ([]models.Scope, error) {
+	attributes := map[string]interface{}{
+		"name": name,
+	}
+
+	return FindByAttributes[models.Scope](SCOPE_MODEL, attributes)
+}

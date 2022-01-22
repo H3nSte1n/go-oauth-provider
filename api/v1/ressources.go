@@ -10,21 +10,21 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type ServiceList struct {
-	Scopes []models.Service `json:"services" binding:"dive"`
+type RessourceList struct {
+	Scopes []models.Ressource `json:"ressources" binding:"dive"`
 }
 
-func CreateService(c *gin.Context) {
-	var service models.Service
-	if err := c.ShouldBindJSON(&service); err != nil {
+func CreateRessource(c *gin.Context) {
+	var ressource models.Ressource
+	if err := c.ShouldBindJSON(&ressource); err != nil {
 		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
 		return
 	}
 
 	currentTime := time.Now()
-	service.CreatedAt = &currentTime
-	id, err := db.CreateService(&service)
+	ressource.CreatedAt = &currentTime
+	id, err := db.CreateRessource(&ressource)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
@@ -34,17 +34,17 @@ func CreateService(c *gin.Context) {
 	c.JSON(200, gin.H{"id": id})
 }
 
-func UpdateService(c *gin.Context) {
-	var service models.Service
-	if err := c.ShouldBindJSON(&service); err != nil {
+func UpdateRessource(c *gin.Context) {
+	var ressource models.Ressource
+	if err := c.ShouldBindJSON(&ressource); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
 		return
 	}
 
 	currentTime := time.Now()
-	service.UpdatedAt = &currentTime
+	ressource.UpdatedAt = &currentTime
 	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
-	id, err := db.UpdateService(docID, &service)
+	id, err := db.UpdateRessource(docID, &ressource)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
@@ -54,19 +54,19 @@ func UpdateService(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"id": id})
 }
 
-func GetService(c *gin.Context) {
+func GetRessource(c *gin.Context) {
 	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
-	service, err := db.GetService(docID)
+	ressource, err := db.GetRessource(docID)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
 	}
 
-	c.JSON(http.StatusOK, gin.H{"service": service})
+	c.JSON(http.StatusOK, gin.H{"ressource": ressource})
 }
 
-func GetServices(c *gin.Context) {
-	services, err := db.GetServices()
+func GetRessources(c *gin.Context) {
+	ressources, err := db.GetRessources()
 
 	if err != nil {
 		c.JSON(500, gin.H{
@@ -75,6 +75,6 @@ func GetServices(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"services": services,
+		"ressources": ressources,
 	})
 }
