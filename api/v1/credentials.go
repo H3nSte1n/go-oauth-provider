@@ -12,7 +12,7 @@ import (
 )
 
 type ScopeList struct {
-	Scopes []models.Scope `binding:"required"`
+	Scopes []models.Scope `json:"scopes" binding:"dive"`
 }
 
 func CreateCredentials(c *gin.Context) {
@@ -22,7 +22,7 @@ func CreateCredentials(c *gin.Context) {
 	var scopes ScopeList
 	if err := c.ShouldBindJSON(&scopes); err != nil {
 		log.Print(err)
-		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
+		c.JSON(http.StatusBadRequest, gin.H{"msg": err.Error()})
 		return
 	}
 
