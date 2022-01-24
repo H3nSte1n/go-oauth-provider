@@ -2,7 +2,6 @@ package db
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"fmt"
 
 	"oauth_provider/models"
 )
@@ -22,13 +21,11 @@ func GetCredential(id primitive.ObjectID) (models.Credential, error) {
 	return Get[models.Credential](MODEL, id)
 }
 
-func CredentialsFindByClientIdAndClientSecret(client_secret string, client_id string) ([]models.Credential, error) {
+func CredentialsFindByClientIdAndClientSecret(client_secret string, client_id string) (models.Credential, error) {
 	attributes := map[string]interface{}{
-		"client_secret": client_secret,
-		"client_id":     client_id,
+		"clientsecret": client_secret,
+		"clientid": client_id,
 	}
-
-	fmt.Println("attributes", attributes)
 
 	return FindByAttributes[models.Credential](MODEL, attributes)
 }

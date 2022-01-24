@@ -2,6 +2,7 @@ package db
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
 
 	"oauth_provider/models"
 )
@@ -25,9 +26,12 @@ func GetScope(id primitive.ObjectID) (models.Scope, error) {
 	return Get[models.Scope](SCOPE_MODEL, id)
 }
 
-func ScopesFindByName(name string) ([]models.Scope, error) {
+func ScopeFindByNameIds(name string, ids []primitive.ObjectID) (models.Scope, error) {
 	attributes := map[string]interface{}{
 		"name": name,
+		"_id": bson.M{
+			"$in": ids,
+		},
 	}
 
 	return FindByAttributes[models.Scope](SCOPE_MODEL, attributes)

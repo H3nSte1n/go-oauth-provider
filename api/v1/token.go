@@ -12,8 +12,9 @@ func CreateToken(c *gin.Context) {
 	client_id := c.Query("client_id")
 	ressource := c.Query("ressource")
 
-	scope, scope_err := verify.CheckIfScopeExists(ressource)
-	if verified := verify.Client(client_secret, client_id, *scope, scope_err); verified != true {
+	credentials, credentials_err := verify.CredentialsExists(client_secret, client_id)
+	scope, scope_err := verify.ScopeExists(ressource, credentials.ScopeIDs)
+	if verified := verify.Client(scope.ID, credentials.ScopeIDs); verified != true || credentials_err != nil || scope_err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"msg": "Unauthorized"})
 		return
 	}

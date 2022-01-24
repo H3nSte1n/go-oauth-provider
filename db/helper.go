@@ -4,7 +4,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/bson"
 	"log"
-	"fmt"
 
 	"oauth_provider/utils"
 )
@@ -91,7 +90,7 @@ func Update[T any](model string, id primitive.ObjectID, object T) (primitive.Obj
 	return id, nil
 }
 
-func FindByAttributes[T any](model string, attributes map[string]interface{}) ([]T, error) {
+func FindManyByAttributes[T any](model string, attributes map[string]interface{}) ([]T, error) {
 	client, ctx, cancel := getConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
@@ -108,7 +107,20 @@ func FindByAttributes[T any](model string, attributes map[string]interface{}) ([
 		log.Printf("Could not fetch %q: %v", model, err)
 		return nil, err
 	}
-	fmt.Println("res", res)
 
 	return res, err
+}
+
+func FindByAttributes[T any](model string, attributes map[string]interface{}) (T, error) {
+	client, ctx, cancel := getConnection()
+	defer cancel()
+	defer client.Disconnect(ctx)
+
+	var res T
+	if err := client.Database(model).Collection(model).FindOne(ctx, attributes).Decode(&res); err != nil {
+		log.Printf("Could not fetch %q: %v", model, err)
+		return res, err
+	}
+
+	return res, nil
 }
