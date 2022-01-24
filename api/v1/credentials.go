@@ -30,13 +30,19 @@ func CreateCredentials(c *gin.Context) {
 	scopeIds, _ := db.CreateScopes(convertedScopes)
 	currentTime := time.Now()
 	credential := models.Credential{
-		ClientId:     clientId,
-		ClientSecret: clientSecret,
+		ClientId:     &clientId,
+		ClientSecret: &clientSecret,
 		ScopeIDs:     scopeIds,
 		CreatedAt:    &currentTime,
 	}
 	
-	db.CreateCredential(&credential)
+	_, credentials_err := db.CreateCredential(&credential)
+
+	if credentials_err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": credentials_err.Error()})
+		return
+	}
+
 	c.JSON(200, gin.H{
 		"client_id": clientId,
 		"client_secret": clientSecret,

@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-// Available Ressource Services
-type Service struct {
+// Avaiable Ressources
+type Ressource struct {
 	ID 						primitive.ObjectID  	`json:"id" bson:"_id,omitempty"`
-	Name 					string 								`json:"name" binding:"required,unique,min=5,max=255"`
+	Name 					string 								`json:"name" binding:"required,min=5,max=255"`
 	Url 					string 								`json:"url" binding:"required,url`
 	CreatedAt 		*time.Time 						`json:"created_at"`
 	UpdatedAt 		*time.Time 						`json:"updated_at"`

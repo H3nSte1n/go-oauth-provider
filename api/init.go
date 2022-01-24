@@ -11,10 +11,12 @@ func Init() {
 	r.POST("/credentials", v1.CreateCredentials)
 	r.GET("/credentials", v1.GetCredentials)
 
-	r.POST("/service", v1.CreateService)
-	r.PATCH("/service/:id", v1.UpdateService)
-	r.GET("/service/:id", v1.GetService)
-	r.GET("/services", v1.GetServices)
+	r.POST("/ressource", v1.CreateRessource)
+	r.PATCH("/ressource/:id", v1.UpdateRessource)
+	r.GET("/ressource/:id", v1.GetRessource)
+	r.GET("/ressources", v1.GetRessources)
+
+	r.GET("/token", v1.CreateToken)
 
 
 	r.Run(":5002")
