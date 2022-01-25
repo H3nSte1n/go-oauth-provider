@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"oauth_provider/utils"
 	"oauth_provider/utils/verify"
+	"oauth_provider/models"
 )
 
 func CreateToken(c *gin.Context) {
@@ -19,7 +20,7 @@ func CreateToken(c *gin.Context) {
 		return
 	}
 	
-	token := utils.CreateAccessToken(*scope)
+	token := utils.CreateAccessToken[models.Scope](*scope) // TODO: Remove password from here
 	signedToken, err := utils.SignToken(token)
 
 	if err != nil {
