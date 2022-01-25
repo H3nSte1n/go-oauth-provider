@@ -22,6 +22,8 @@ func Init() {
 	r.GET("/user/:id", v1.GetUser)
 	r.GET("/users", v1.GetUsers)
 
+	r.POST("/login", v1.Login)
+
 	r.GET("/token", v1.CreateToken)
 
 

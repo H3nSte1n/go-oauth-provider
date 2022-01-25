@@ -28,3 +28,12 @@ func GetUsers() ([]models.User, error) {
 func GetUser(id primitive.ObjectID) (models.User, error) {
 	return Get[models.User](USER_MODEL, id)
 }
+
+func UserFindByUsernamePassword(username *string, password *string) (models.User, error) {
+	attributes := map[string]interface{}{
+		"username": username,
+		"password": password,
+	}
+
+	return FindByAttributes[models.User](USER_MODEL, attributes)
+}

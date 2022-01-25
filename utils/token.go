@@ -5,18 +5,16 @@ import (
 	"os"
 	"log"
 	"time"
-
-	"oauth_provider/models"
 )
 
-type accessTokenClaims struct {
-	models.Scope
+type accessTokenClaims[T any] struct {
+	OwnClaims T
 	jwt.StandardClaims
 }
 
-func CreateAccessToken(ownClaims models.Scope) *jwt.Token {
+func CreateAccessToken[T any](ownClaims T) *jwt.Token {
 	expirationTime := time.Now().Add(5 * time.Minute)
-	claims := accessTokenClaims{
+	claims := accessTokenClaims[T]{
 		ownClaims,
 		jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
