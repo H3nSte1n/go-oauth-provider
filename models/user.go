@@ -11,7 +11,7 @@ type User struct {
 	LastName 			string 								`json:"last_name" binding:"required"`
 	Email 				string 								`json:"email" binding:"required,email"`
 	Username 			string 								`json:"username" binding:"required,min=5,max=255"`
-	Password 			string 								`json:"password" binding:"required,min=5,max=255"` // TODO: change to hash
+	Password 			string 								`json:"password" binding:"required,min=5,max=255"`
 	CreatedAt 		*time.Time 						`json:"created_at"`
 	UpdatedAt 		*time.Time 						`json:"updated_at"`
 }

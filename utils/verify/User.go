@@ -1,6 +1,7 @@
 package verify
 
 import (
+	"golang.org/x/crypto/bcrypt"
 	"log"
 
 	"oauth_provider/models"
@@ -8,12 +9,18 @@ import (
 )
 
 func User(username *string, password *string) (*models.User, error) {
-	user, err := db.UserFindByUsernamePassword(username, password)
+	user, err := db.UserFindByUsername(username)
+	validPassword := validPassword(password, &user.Password)
 
-	if err != nil {
+	if err != nil || !validPassword {
 		log.Print(err)
 		return nil, err
 	}
 
 	return &user, nil
+}
+
+func validPassword(password *string, hash *string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(*hash), []byte(*password))
+  return err == nil
 }
