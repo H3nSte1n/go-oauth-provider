@@ -2,31 +2,32 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
-	"fmt"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"golang.org/x/crypto/bcrypt"
 	"net/http"
+	"log"
+	"time"
+
 	"oauth_provider/models"
 	"oauth_provider/db"
-	"time"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func CreateUser(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
-		fmt.Println(user)
-		fmt.Println("USERASDASD")
-		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
 		return
 	}
 
+	bytes, bycrypt_err := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
+	user.Password = string(bytes)
 	currentTime := time.Now()
 	user.CreatedAt = &currentTime
 	id, err := db.CreateUser(&user)
 
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
+	if err != nil || bycrypt_err != nil {
+		a := err 
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Error: " + a.Error() + " Bycrypt: " + bycrypt_err.Error()})
 		return
 	}
 	
