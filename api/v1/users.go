@@ -3,6 +3,7 @@ package v1
 import (
 	"github.com/gin-gonic/gin"
 	"log"
+	"fmt"
 	"net/http"
 	"oauth_provider/models"
 	"oauth_provider/db"
@@ -10,17 +11,19 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func CreateRessource(c *gin.Context) {
-	var ressource models.Ressource
-	if err := c.ShouldBindJSON(&ressource); err != nil {
+func CreateUser(c *gin.Context) {
+	var user models.User
+	if err := c.ShouldBindJSON(&user); err != nil {
+		fmt.Println(user)
+		fmt.Println("USERASDASD")
 		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
 		return
 	}
 
 	currentTime := time.Now()
-	ressource.CreatedAt = &currentTime
-	id, err := db.CreateRessource(&ressource)
+	user.CreatedAt = &currentTime
+	id, err := db.CreateUser(&user)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
@@ -30,17 +33,17 @@ func CreateRessource(c *gin.Context) {
 	c.JSON(200, gin.H{"id": id})
 }
 
-func UpdateRessource(c *gin.Context) {
-	var ressource models.Ressource
-	if err := c.ShouldBindJSON(&ressource); err != nil {
+func UpdateUser(c *gin.Context) {
+	var user models.User
+	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
 		return
 	}
 
 	currentTime := time.Now()
-	ressource.UpdatedAt = &currentTime
+	user.UpdatedAt = &currentTime
 	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
-	id, err := db.UpdateRessource(docID, &ressource)
+	id, err := db.UpdateUser(docID, &user)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
@@ -50,19 +53,33 @@ func UpdateRessource(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"id": id})
 }
 
-func GetRessource(c *gin.Context) {
+func DeleteUser(c *gin.Context) {
 	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
-	ressource, err := db.GetRessource(docID)
+	user_id, err := db.DeleteUser(docID)
+
+	if err != nil {
+		log.Print(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"user_id": user_id,
+	})
+}
+
+func GetUser(c *gin.Context) {
+	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
+	user, err := db.GetUser(docID)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
 	}
 
-	c.JSON(http.StatusOK, gin.H{"ressource": ressource})
+	c.JSON(http.StatusOK, gin.H{"user": user})
 }
 
-func GetRessources(c *gin.Context) {
-	ressources, err := db.GetRessources()
+func GetUsers(c *gin.Context) {
+	users, err := db.GetUsers()
 
 	if err != nil {
 		c.JSON(500, gin.H{
@@ -71,6 +88,6 @@ func GetRessources(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"ressources": ressources,
+		"users": users,
 	})
 }
