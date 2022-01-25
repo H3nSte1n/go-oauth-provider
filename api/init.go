@@ -16,6 +16,12 @@ func Init() {
 	r.GET("/ressource/:id", v1.GetRessource)
 	r.GET("/ressources", v1.GetRessources)
 
+	r.POST("/user", v1.CreateUser)
+	r.PATCH("/user/:id", v1.UpdateUser)
+	r.DELETE("/user/:id", v1.DeleteUser)
+	r.GET("/user/:id", v1.GetUser)
+	r.GET("/users", v1.GetUsers)
+
 	r.GET("/token", v1.CreateToken)
 
 

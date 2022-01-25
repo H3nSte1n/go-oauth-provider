@@ -124,3 +124,17 @@ func FindByAttributes[T any](model string, attributes map[string]interface{}) (T
 
 	return res, nil
 }
+
+func Delete[T any](model string, id primitive.ObjectID) (*primitive.ObjectID, error) {
+	client, ctx, cancel := getConnection()
+	defer cancel()
+	defer client.Disconnect(ctx)
+
+	var res T
+	if err := client.Database(model).Collection(model).FindOneAndDelete(ctx, bson.D{{"_id", id}}).Decode(&res); err != nil {
+		log.Printf("Could not delete %q: %v", model, err)
+		return nil, err
+	}
+
+	return &id, nil
+}
