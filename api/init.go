@@ -23,6 +23,12 @@ func Init() {
 	r.DELETE("/user/:id", middleware.TokenAuth(), v1.DeleteUser)
 	r.GET("/user/:id", middleware.TokenAuth(), v1.GetUser)
 	r.GET("/users", middleware.TokenAuth(), v1.GetUsers)
+	
+	r.POST("/access_group", middleware.TokenAuth(), v1.CreateAccessGroup)
+	r.GET("/access_groups", middleware.TokenAuth(), v1.GetAccessGroups)
+	r.GET("/access_group/:id", middleware.TokenAuth(), v1.GetAccessGroup)
+	r.PATCH("/access_group/:id", middleware.TokenAuth(), v1.UpdateAccessGroup)
+	r.DELETE("/access_group/:id", middleware.TokenAuth(), v1.DeleteAccessGroup)
 
 	r.POST("/login", v1.Login)
 
