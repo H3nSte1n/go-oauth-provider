@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"log"
 
-	"oauth_provider/utils"
+	"oauth_provider/utils/token"
 	"oauth_provider/utils/verify"
 	"oauth_provider/models"
 )
@@ -30,8 +30,8 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token := utils.CreateAccessToken[models.User](*user)
-	signedToken, err := utils.SignToken(token)
+	tokenString := token.CreateJwt[models.User](*user)
+	signedToken, err := token.Sign(tokenString)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
