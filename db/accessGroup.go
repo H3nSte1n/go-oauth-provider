@@ -2,6 +2,7 @@ package db
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
 
 	"oauth_provider/models"
 )
@@ -27,4 +28,17 @@ func GetAccessGroups() ([]models.AccessGroup, error) {
 
 func GetAccessGroup(id primitive.ObjectID) (models.AccessGroup, error) {
 	return Get[models.AccessGroup](ACCESS_GROUP_MODEL, id)
+}
+
+func AccessGroupesFindByIdRessource(ressourceName string, ids []primitive.ObjectID) ([]models.AccessGroup, error) {
+	attributes := map[string]interface{}{
+		"_id": bson.M{
+			"$in": ids,
+		},
+		"resources": bson.M{
+			"$eq": ressourceName,
+		},
+	}
+
+	return FindManyByAttributes[models.AccessGroup](ACCESS_GROUP_MODEL, attributes)
 }

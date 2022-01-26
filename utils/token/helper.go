@@ -4,16 +4,19 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"fmt"
 	"os"
+
+	"oauth_provider/models"
 )
 
-func verify(tokenString string) (*jwt.Token, error) {
-  token, err := jwt.Parse(tokenString, jwtParseCallback)
+func verify(tokenString string) (*JwtTokenClaims[models.User], error) {
+	claims := JwtTokenClaims[models.User]{}
+  token, err := jwt.ParseWithClaims(tokenString, &claims, jwtParseCallback)
   if err != nil {
      return nil, err
   }
 
 	if token.Valid {
-		return token, nil
+		return &claims, nil
 	} else if ve, ok := err.(*jwt.ValidationError); ok {
 		if ve.Errors&jwt.ValidationErrorMalformed != 0 {
 			return nil, fmt.Errorf("That's not even a token")

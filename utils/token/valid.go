@@ -1,15 +1,20 @@
 package token
 
-import "github.com/dgrijalva/jwt-go"
+import (
+	"fmt"
+	"oauth_provider/db"
+)
 
-func Valid(tokenString string) error {
-  token, err := verify(tokenString)
-
+func Valid(ressourceName string, tokenString string) error {
+  claims, err := verify(tokenString)
   if err != nil {
      return err
   }
-  if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
-     return err
-  }
+
+	accessGroups, err := db.AccessGroupesFindByIdRessource(ressourceName, claims.OwnClaims.AccessGroups)
+	if err != nil || len(accessGroups) == 0 {
+		return fmt.Errorf("You are not authorized to access this ressource")
+	}
+
   return nil
 }

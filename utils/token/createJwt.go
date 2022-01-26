@@ -6,12 +6,12 @@ import (
 )
 
 type JwtTokenClaims[T any] struct {
-	OwnClaims T
+	OwnClaims T `json:"OwnClaims"`
 	jwt.StandardClaims
 }
 
 func CreateJwt[T any](ownClaims T) *jwt.Token {
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(10 * time.Minute)
 	claims := JwtTokenClaims[T]{
 		ownClaims,
 		jwt.StandardClaims{
