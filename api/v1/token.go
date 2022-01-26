@@ -3,8 +3,8 @@ package v1
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"oauth_provider/utils"
 	"oauth_provider/utils/verify"
+	"oauth_provider/utils/token"
 	"oauth_provider/models"
 )
 
@@ -20,8 +20,8 @@ func CreateToken(c *gin.Context) {
 		return
 	}
 	
-	token := utils.CreateAccessToken[models.Scope](*scope) // TODO: Remove password from here
-	signedToken, err := utils.SignToken(token)
+	tokenString := token.CreateJwt[models.Scope](*scope) // TODO: Remove password from here
+	signedToken, err := token.Sign(tokenString)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
