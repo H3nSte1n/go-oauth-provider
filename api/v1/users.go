@@ -20,19 +20,20 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	bytes, bycrypt_err := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
+	cost := 14
+	bytes, bycryptErr := bcrypt.GenerateFromPassword([]byte(user.Password), cost)
 	user.Password = string(bytes)
 	currentTime := time.Now()
 	user.CreatedAt = &currentTime
 	id, err := db.CreateUser(&user)
 
-	if err != nil || bycrypt_err != nil {
-		a := err
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Error: " + a.Error() + " Bycrypt: " + bycrypt_err.Error()})
+	if err != nil || bycryptErr != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Error: " + err.Error() + " Bycrypt: " + bycryptErr.Error()})
+
 		return
 	}
 
-	c.JSON(200, gin.H{"id": id})
+	c.JSON(http.StatusOK, gin.H{"id": id})
 }
 
 func UpdateUser(c *gin.Context) {
@@ -57,7 +58,7 @@ func UpdateUser(c *gin.Context) {
 
 func DeleteUser(c *gin.Context) {
 	docID, _ := primitive.ObjectIDFromHex(c.Param("id"))
-	user_id, err := db.DeleteUser(docID)
+	userID, err := db.DeleteUser(docID)
 
 	if err != nil {
 		log.Print(err)
@@ -65,7 +66,7 @@ func DeleteUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"user_id": user_id,
+		"user_id": userID,
 	})
 }
 
@@ -84,12 +85,12 @@ func GetUsers(c *gin.Context) {
 	users, err := db.GetUsers()
 
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
 	}
 
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"users": users,
 	})
 }

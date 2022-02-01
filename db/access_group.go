@@ -11,11 +11,11 @@ var ACCESS_GROUP_MODEL = "access_groups"
 
 func CreateAccessGroup(accessGroup *models.AccessGroup) (primitive.ObjectID, error) {
 	accessGroup.ID = primitive.NewObjectID()
-	return Create[*models.AccessGroup](accessGroup, ACCESS_GROUP_MODEL)
+	return Create(accessGroup, ACCESS_GROUP_MODEL)
 }
 
 func UpdateAccessGroup(id primitive.ObjectID, accessGroup *models.AccessGroup) (primitive.ObjectID, error) {
-	return Update[*models.AccessGroup](ACCESS_GROUP_MODEL, id, accessGroup)
+	return Update(ACCESS_GROUP_MODEL, id, accessGroup)
 }
 
 func DeleteAccessGroup(id primitive.ObjectID) (*primitive.ObjectID, error) {

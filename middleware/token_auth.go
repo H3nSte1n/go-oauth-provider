@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
-
+	"net/http"
 	"oauth_provider/utils/token"
+
+	"github.com/gin-gonic/gin"
 )
 
 func TokenAuth() gin.HandlerFunc {
@@ -12,8 +13,9 @@ func TokenAuth() gin.HandlerFunc {
 		err := token.Valid(c.Request.URL.Path[1:], tokenString)
 
 		if err != nil {
-			c.JSON(401, gin.H{"error": err.Error()})
+			c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 			c.Abort()
+
 			return
 		}
 

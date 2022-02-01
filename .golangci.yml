@@ -34,8 +34,7 @@ linters:
     - goimports
     - gomnd
     - gocyclo
-    - gosec
-    - gosimple
+    - gosec   
     - govet
     - ineffassign
     - misspell
@@ -44,9 +43,7 @@ linters:
     - prealloc
     - predeclared
     - revive
-    - staticcheck
     - structcheck
-    - stylecheck
     - thelper
     - tparallel
     - typecheck

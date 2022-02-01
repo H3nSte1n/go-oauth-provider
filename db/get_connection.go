@@ -19,7 +19,7 @@ const (
 )
 
 // GetConnection - Retrieves a client to the DocumentDB
-func getConnection() (*mongo.Client, context.Context, context.CancelFunc) {
+func GetConnection() (*mongo.Client, context.Context, context.CancelFunc) {
 	username := os.Getenv("MONGODB_USERNAME")
 	password := os.Getenv("MONGODB_PASSWORD")
 

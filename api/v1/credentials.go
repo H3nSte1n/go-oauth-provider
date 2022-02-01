@@ -18,34 +18,35 @@ type ScopeList struct {
 
 func CreateCredentials(c *gin.Context) {
 	clientSecret := uuid.New().String()
-	clientId := uuid.New().String()
+	clientID := uuid.New().String()
 
 	var scopes ScopeList
 	if err := c.ShouldBindJSON(&scopes); err != nil {
 		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err.Error()})
+
 		return
 	}
 
-	convertedScopes := utils.ConvertToInterfaceArray[models.Scope](scopes.Scopes)
+	convertedScopes := utils.ConvertToInterfaceArray(scopes.Scopes)
 	scopeIds, _ := db.CreateScopes(convertedScopes)
 	currentTime := time.Now()
 	credential := models.Credential{
-		ClientId:     &clientId,
+		ClientID:     &clientID,
 		ClientSecret: &clientSecret,
 		ScopeIDs:     scopeIds,
 		CreatedAt:    &currentTime,
 	}
 
-	_, credentials_err := db.CreateCredential(&credential)
+	_, credentialsErr := db.CreateCredential(&credential)
 
-	if credentials_err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": credentials_err.Error()})
+	if credentialsErr != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": credentialsErr.Error()})
 		return
 	}
 
-	c.JSON(200, gin.H{
-		"client_id":     clientId,
+	c.JSON(http.StatusOK, gin.H{
+		"client_id":     clientID,
 		"client_secret": clientSecret,
 	})
 }
@@ -54,12 +55,12 @@ func GetCredentials(c *gin.Context) {
 	credentials, err := db.GetCredentials()
 
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
 	}
 
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"credentials": credentials,
 	})
 }

@@ -16,6 +16,7 @@ func CreateRessource(c *gin.Context) {
 	if err := c.ShouldBindJSON(&ressource); err != nil {
 		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
+
 		return
 	}
 
@@ -28,7 +29,7 @@ func CreateRessource(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"id": id})
+	c.JSON(http.StatusOK, gin.H{"id": id})
 }
 
 func UpdateRessource(c *gin.Context) {
@@ -66,12 +67,12 @@ func GetRessources(c *gin.Context) {
 	ressources, err := db.GetRessources()
 
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
 	}
 
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"ressources": ressources,
 	})
 }

@@ -9,9 +9,8 @@ import (
 	"oauth_provider/utils"
 )
 
-//Create creating a task in a mongo or document db
 func Create[T any](object T, model string) (primitive.ObjectID, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -26,7 +25,7 @@ func Create[T any](object T, model string) (primitive.ObjectID, error) {
 }
 
 func CreateMany(objects []interface{}, model string) ([]primitive.ObjectID, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -41,9 +40,8 @@ func CreateMany(objects []interface{}, model string) ([]primitive.ObjectID, erro
 	return convertedOIDs, nil
 }
 
-//Create creating a task in a mongo or document db
 func GetList[T any](model string) ([]T, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -64,7 +62,7 @@ func GetList[T any](model string) ([]T, error) {
 }
 
 func Get[T any](model string, id primitive.ObjectID) (T, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -78,7 +76,7 @@ func Get[T any](model string, id primitive.ObjectID) (T, error) {
 }
 
 func Update[T any](model string, id primitive.ObjectID, object T) (primitive.ObjectID, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -91,7 +89,7 @@ func Update[T any](model string, id primitive.ObjectID, object T) (primitive.Obj
 }
 
 func FindManyByAttributes[T any](model string, attributes map[string]interface{}) ([]T, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -112,7 +110,7 @@ func FindManyByAttributes[T any](model string, attributes map[string]interface{}
 }
 
 func FindByAttributes[T any](model string, attributes map[string]interface{}) (T, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 
@@ -126,7 +124,7 @@ func FindByAttributes[T any](model string, attributes map[string]interface{}) (T
 }
 
 func Delete[T any](model string, id primitive.ObjectID) (*primitive.ObjectID, error) {
-	client, ctx, cancel := getConnection()
+	client, ctx, cancel := GetConnection()
 	defer cancel()
 	defer client.Disconnect(ctx)
 

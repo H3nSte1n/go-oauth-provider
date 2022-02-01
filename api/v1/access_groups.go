@@ -17,6 +17,7 @@ func CreateAccessGroup(c *gin.Context) {
 	if err := c.ShouldBindJSON(&accessGroup); err != nil {
 		log.Print(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err.Error()})
+
 		return
 	}
 
@@ -30,7 +31,7 @@ func CreateAccessGroup(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"access_group": accessGroup,
 	})
 }
@@ -84,12 +85,12 @@ func GetAccessGroups(c *gin.Context) {
 	accessGroups, err := db.GetAccessGroups()
 
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
 	}
 
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"accessGroups": accessGroups,
 	})
 }

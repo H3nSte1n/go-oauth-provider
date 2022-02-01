@@ -20,6 +20,7 @@ func Login(c *gin.Context) {
 	if err := c.ShouldBindJSON(&login); err != nil {
 		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"msg": err})
+
 		return
 	}
 

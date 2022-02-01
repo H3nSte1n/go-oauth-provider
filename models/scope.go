@@ -7,7 +7,7 @@ import (
 )
 
 type Scope struct {
-	ID          primitive.ObjectID  `json:"id" bson:"_id,omitempty"`
+	ID          primitive.ObjectID  `json:"_id,omitempty"`
 	Name        string              `json:"name" binding:"required,min=5,max=255"`
 	Read        *bool               `json:"read" binding:"required"`
 	Write       *bool               `json:"write" binding:"required"`

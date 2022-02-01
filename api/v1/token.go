@@ -9,13 +9,14 @@ import (
 )
 
 func CreateToken(c *gin.Context) {
-	client_secret := c.Query("client_secret")
-	client_id := c.Query("client_id")
+	clientSecret := c.Query("client_secret")
+	clientID := c.Query("client_id")
 	ressource := c.Query("ressource")
 
-	credentials, credentials_err := verify.CredentialsExists(client_secret, client_id)
-	scope, scope_err := verify.ScopeExists(ressource, credentials.ScopeIDs)
-	if verified := verify.Client(scope.ID, credentials.ScopeIDs); verified != true || credentials_err != nil || scope_err != nil {
+	credentials, credentialsErr := verify.CredentialsExists(clientSecret, clientID)
+	scope, scopeErr := verify.ScopeExists(ressource, credentials.ScopeIDs)
+
+	if verified := verify.Client(scope.ID, credentials.ScopeIDs); verified != true || credentialsErr != nil || scopeErr != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"msg": "Unauthorized"})
 		return
 	}
