@@ -1,8 +1,8 @@
 package db
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"oauth_provider/models"
 )
@@ -11,7 +11,7 @@ var SCOPE_MODEL = "scopes"
 
 func CreateScope(scope *models.Scope) (primitive.ObjectID, error) {
 	scope.ID = primitive.NewObjectID()
-	return Create[*models.Scope](scope, SCOPE_MODEL)
+	return Create(scope, SCOPE_MODEL)
 }
 
 func CreateScopes(scope []interface{}) ([]primitive.ObjectID, error) {

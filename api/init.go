@@ -1,11 +1,13 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
 
-	"oauth_provider/api/v1"
 	"oauth_provider/middleware"
+
+	"github.com/gin-gonic/gin"
+
+	v1 "oauth_provider/api/v1"
 )
 
 func Init() {
@@ -23,7 +25,7 @@ func Init() {
 	r.DELETE("/user/:id", middleware.TokenAuth(), v1.DeleteUser)
 	r.GET("/user/:id", middleware.TokenAuth(), v1.GetUser)
 	r.GET("/users", middleware.TokenAuth(), v1.GetUsers)
-	
+
 	r.POST("/access_group", middleware.TokenAuth(), v1.CreateAccessGroup)
 	r.GET("/access_groups", middleware.TokenAuth(), v1.GetAccessGroups)
 	r.GET("/access_group/:id", middleware.TokenAuth(), v1.GetAccessGroup)
@@ -33,7 +35,6 @@ func Init() {
 	r.POST("/login", v1.Login)
 
 	r.GET("/token", middleware.TokenAuth(), v1.CreateToken)
-
 
 	r.Run(":5002")
 	fmt.Println("Service running!")

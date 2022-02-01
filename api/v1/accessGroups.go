@@ -1,14 +1,15 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"net/http"
 	"log"
+	"net/http"
 	"time"
 
-	"oauth_provider/models"
+	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"oauth_provider/db"
+	"oauth_provider/models"
 )
 
 func CreateAccessGroup(c *gin.Context) {
@@ -21,7 +22,7 @@ func CreateAccessGroup(c *gin.Context) {
 
 	currentTime := time.Now()
 	accessGroup.CreatedAt = &currentTime
-	
+
 	_, accessGroupError := db.CreateAccessGroup(&accessGroup)
 
 	if accessGroupError != nil {

@@ -1,11 +1,11 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
-	"oauth_provider/utils/verify"
 	"oauth_provider/utils/token"
-	"oauth_provider/models"
+	"oauth_provider/utils/verify"
+
+	"github.com/gin-gonic/gin"
 )
 
 func CreateToken(c *gin.Context) {
@@ -19,8 +19,8 @@ func CreateToken(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"msg": "Unauthorized"})
 		return
 	}
-	
-	tokenString := token.CreateJwt[models.Scope](*scope) // TODO: Remove password from here
+
+	tokenString := token.CreateJwt(*scope) // TODO: Remove password from here
 	signedToken, err := token.Sign(tokenString)
 
 	if err != nil {

@@ -10,7 +10,7 @@ var MODEL = "credentials"
 
 func CreateCredential(credential *models.Credential) (primitive.ObjectID, error) {
 	credential.ID = primitive.NewObjectID()
-	return Create[*models.Credential](credential, MODEL)
+	return Create(credential, MODEL)
 }
 
 func GetCredentials() ([]models.Credential, error) {
@@ -24,7 +24,7 @@ func GetCredential(id primitive.ObjectID) (models.Credential, error) {
 func CredentialsFindByClientIdAndClientSecret(client_secret string, client_id string) (models.Credential, error) {
 	attributes := map[string]interface{}{
 		"clientsecret": client_secret,
-		"clientid": client_id,
+		"clientid":     client_id,
 	}
 
 	return FindByAttributes[models.Credential](MODEL, attributes)

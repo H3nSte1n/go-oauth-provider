@@ -1,15 +1,16 @@
 package v1
 
 import (
+	"log"
+	"net/http"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
-	"net/http"
-	"log"
-	"time"
 
-	"oauth_provider/models"
 	"oauth_provider/db"
+	"oauth_provider/models"
 )
 
 func CreateUser(c *gin.Context) {
@@ -26,11 +27,11 @@ func CreateUser(c *gin.Context) {
 	id, err := db.CreateUser(&user)
 
 	if err != nil || bycrypt_err != nil {
-		a := err 
+		a := err
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Error: " + a.Error() + " Bycrypt: " + bycrypt_err.Error()})
 		return
 	}
-	
+
 	c.JSON(200, gin.H{"id": id})
 }
 

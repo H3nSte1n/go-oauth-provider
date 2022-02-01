@@ -6,11 +6,11 @@ import (
 )
 
 func Extract(r *http.Request) string {
-  token := r.Header.Get("Authorization")
+	token := r.Header.Get("Authorization")
 
 	authArray := strings.Split(token, " ")
-  if len(authArray) > 1 {
-     return authArray[1]
-  }
-  return ""
+	if len(authArray) > 1 {
+		return authArray[1]
+	}
+	return ""
 }

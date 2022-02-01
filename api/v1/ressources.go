@@ -1,12 +1,13 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"oauth_provider/models"
 	"oauth_provider/db"
+	"oauth_provider/models"
 	"time"
+
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -26,7 +27,7 @@ func CreateRessource(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
 		return
 	}
-	
+
 	c.JSON(200, gin.H{"id": id})
 }
 

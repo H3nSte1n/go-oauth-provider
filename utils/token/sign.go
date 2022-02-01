@@ -1,9 +1,10 @@
 package token
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	"os"
 	"log"
+	"os"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 func Sign(token *jwt.Token) (*string, error) {

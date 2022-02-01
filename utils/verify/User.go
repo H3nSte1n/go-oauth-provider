@@ -1,11 +1,12 @@
 package verify
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"log"
 
-	"oauth_provider/models"
+	"golang.org/x/crypto/bcrypt"
+
 	"oauth_provider/db"
+	"oauth_provider/models"
 )
 
 func User(username *string, password *string) (*models.User, error) {
@@ -22,5 +23,5 @@ func User(username *string, password *string) (*models.User, error) {
 
 func validPassword(password *string, hash *string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(*hash), []byte(*password))
-  return err == nil
+	return err == nil
 }

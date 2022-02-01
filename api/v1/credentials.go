@@ -1,14 +1,15 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"log"
 	"net/http"
-	"oauth_provider/models"
 	"oauth_provider/db"
+	"oauth_provider/models"
 	"oauth_provider/utils"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type ScopeList struct {
@@ -35,7 +36,7 @@ func CreateCredentials(c *gin.Context) {
 		ScopeIDs:     scopeIds,
 		CreatedAt:    &currentTime,
 	}
-	
+
 	_, credentials_err := db.CreateCredential(&credential)
 
 	if credentials_err != nil {
@@ -44,7 +45,7 @@ func CreateCredentials(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"client_id": clientId,
+		"client_id":     clientId,
 		"client_secret": clientSecret,
 	})
 }

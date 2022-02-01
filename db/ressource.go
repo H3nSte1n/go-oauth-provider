@@ -10,11 +10,11 @@ var RESSOURCE_MODEL = "ressources"
 
 func CreateRessource(ressource *models.Ressource) (primitive.ObjectID, error) {
 	ressource.ID = primitive.NewObjectID()
-	return Create[*models.Ressource](ressource, RESSOURCE_MODEL)
+	return Create(ressource, RESSOURCE_MODEL)
 }
 
 func UpdateRessource(id primitive.ObjectID, ressource *models.Ressource) (primitive.ObjectID, error) {
-	return Update[*models.Ressource](RESSOURCE_MODEL, id, ressource)
+	return Update(RESSOURCE_MODEL, id, ressource)
 }
 
 func GetRessources() ([]models.Ressource, error) {

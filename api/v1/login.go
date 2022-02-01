@@ -1,13 +1,13 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
 	"log"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 
 	"oauth_provider/utils/token"
 	"oauth_provider/utils/verify"
-	"oauth_provider/models"
 )
 
 type LoginType struct {
@@ -30,7 +30,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	tokenString := token.CreateJwt[models.User](*user)
+	tokenString := token.CreateJwt(*user)
 	signedToken, err := token.Sign(tokenString)
 
 	if err != nil {

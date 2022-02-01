@@ -1,8 +1,9 @@
 package token
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type JwtTokenClaims[T any] struct {

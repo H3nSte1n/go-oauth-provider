@@ -1,9 +1,10 @@
 package db
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/bson"
 	"log"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"oauth_provider/utils"
 )
@@ -81,7 +82,6 @@ func Update[T any](model string, id primitive.ObjectID, object T) (primitive.Obj
 	defer cancel()
 	defer client.Disconnect(ctx)
 
-	
 	if result := client.Database(model).Collection(model).FindOneAndUpdate(ctx, bson.D{{"_id", id}}, bson.D{{"$set", object}}); result.Err() != nil {
 		log.Printf("Could not update %q: %v", model, result.Err())
 		return primitive.NilObjectID, result.Err()

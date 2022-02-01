@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt";
-	"oauth_provider/api";
+	"fmt"
+	"oauth_provider/api"
 )
 
 func main() {

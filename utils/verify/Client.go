@@ -1,16 +1,17 @@
 package verify
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 
-	"oauth_provider/models"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"oauth_provider/db"
+	"oauth_provider/models"
 	"oauth_provider/utils/array"
 )
 
 func Client(scopeId primitive.ObjectID, credentialScopeIds []primitive.ObjectID) bool {
-	if containsValue := array.Contains[primitive.ObjectID](credentialScopeIds, scopeId); containsValue == false {		
+	if containsValue := array.Contains[primitive.ObjectID](credentialScopeIds, scopeId); containsValue == false {
 		log.Print("Scope not found")
 		return false
 	}

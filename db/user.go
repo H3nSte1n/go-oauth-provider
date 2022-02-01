@@ -10,11 +10,11 @@ var USER_MODEL = "users"
 
 func CreateUser(user *models.User) (primitive.ObjectID, error) {
 	user.ID = primitive.NewObjectID()
-	return Create[*models.User](user, USER_MODEL)
+	return Create(user, USER_MODEL)
 }
 
 func UpdateUser(id primitive.ObjectID, user *models.User) (primitive.ObjectID, error) {
-	return Update[*models.User](USER_MODEL, id, user)
+	return Update(USER_MODEL, id, user)
 }
 
 func DeleteUser(id primitive.ObjectID) (*primitive.ObjectID, error) {
