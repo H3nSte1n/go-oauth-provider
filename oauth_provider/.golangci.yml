@@ -59,6 +59,5 @@ issues:
       linters:
         - typecheck
 
-
 run:
   issues-exit-code: 1
