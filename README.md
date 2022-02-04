@@ -4,7 +4,6 @@
 ![Code-Style][code-style]
 [![MIT License][license-shield]][license-url]
 [![made-with-Go][made-with-go]][golang-url]
-
 <br><br>
 
 <details open="open">
