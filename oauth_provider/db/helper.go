@@ -67,7 +67,7 @@ func Get[T any](model string, id primitive.ObjectID) (T, error) {
 	defer client.Disconnect(ctx)
 
 	var res T
-	if err := client.Database(model).Collection(model).FindOne(ctx, bson.D{{"_id", id}}).Decode(&res); err != nil {
+	if err := client.Database(model).Collection(model).FindOne(ctx, bson.D{primitive.E{Key: "_id", Value: id}}).Decode(&res); err != nil {
 		log.Printf("Could not fetch %q: %v", model, err)
 		return res, err
 	}
@@ -80,7 +80,7 @@ func Update[T any](model string, id primitive.ObjectID, object T) (primitive.Obj
 	defer cancel()
 	defer client.Disconnect(ctx)
 
-	if result := client.Database(model).Collection(model).FindOneAndUpdate(ctx, bson.D{{"_id", id}}, bson.D{{"$set", object}}); result.Err() != nil {
+	if result := client.Database(model).Collection(model).FindOneAndUpdate(ctx, bson.D{primitive.E{Key: "_id", Value: id}}, bson.D{primitive.E{Key: "$set", Value: object}}); result.Err() != nil {
 		log.Printf("Could not update %q: %v", model, result.Err())
 		return primitive.NilObjectID, result.Err()
 	}
@@ -129,7 +129,7 @@ func Delete[T any](model string, id primitive.ObjectID) (*primitive.ObjectID, er
 	defer client.Disconnect(ctx)
 
 	var res T
-	if err := client.Database(model).Collection(model).FindOneAndDelete(ctx, bson.D{{"_id", id}}).Decode(&res); err != nil {
+	if err := client.Database(model).Collection(model).FindOneAndDelete(ctx, bson.D{primitive.E{Key: "_id", Value: id}}).Decode(&res); err != nil {
 		log.Printf("Could not delete %q: %v", model, err)
 		return nil, err
 	}

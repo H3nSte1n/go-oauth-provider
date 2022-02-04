@@ -10,23 +10,23 @@ var USER_MODEL = "users"
 
 func CreateUser(user *models.User) (primitive.ObjectID, error) {
 	user.ID = primitive.NewObjectID()
-	return Create(user, USER_MODEL)
+	return Create(user, USER_MODEL) //nolint:typecheck
 }
 
 func UpdateUser(id primitive.ObjectID, user *models.User) (primitive.ObjectID, error) {
-	return Update(USER_MODEL, id, user)
+	return Update(USER_MODEL, id, user) //nolint:typecheck
 }
 
 func DeleteUser(id primitive.ObjectID) (*primitive.ObjectID, error) {
-	return Delete[*models.User](USER_MODEL, id)
+	return Delete[*models.User](USER_MODEL, id) //nolint:typecheck
 }
 
 func GetUsers() ([]models.User, error) {
-	return GetList[models.User](USER_MODEL)
+	return GetList[models.User](USER_MODEL) //nolint:typecheck
 }
 
 func GetUser(id primitive.ObjectID) (models.User, error) {
-	return Get[models.User](USER_MODEL, id)
+	return Get[models.User](USER_MODEL, id) //nolint:typecheck
 }
 
 func UserFindByUsername(username *string) (models.User, error) {
@@ -34,5 +34,5 @@ func UserFindByUsername(username *string) (models.User, error) {
 		"username": username,
 	}
 
-	return FindByAttributes[models.User](USER_MODEL, attributes)
+	return FindByAttributes[models.User](USER_MODEL, attributes) //nolint:typecheck
 }
