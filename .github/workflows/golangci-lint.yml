@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: oauth_provider
+        working-directory: ./oauth_provider
     steps:
       - uses: actions/checkout@v2
       - name: golangci-lint
