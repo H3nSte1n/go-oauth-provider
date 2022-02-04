@@ -46,7 +46,6 @@ linters:
     - structcheck
     - thelper
     - tparallel
-    - typecheck
     - unconvert
     - unparam
     - varcheck
