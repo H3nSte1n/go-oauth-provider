@@ -20,4 +20,4 @@ jobs:
         with:
           version: latest
           working-directory: oauth_provider
-          args: -c ./.golangci.yml
+          args: -D typecheck
