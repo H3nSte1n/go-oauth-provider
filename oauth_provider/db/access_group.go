@@ -11,23 +11,23 @@ var ACCESS_GROUP_MODEL = "access_groups"
 
 func CreateAccessGroup(accessGroup *models.AccessGroup) (primitive.ObjectID, error) {
 	accessGroup.ID = primitive.NewObjectID()
-	return Create(accessGroup, ACCESS_GROUP_MODEL) //nolint:typecheck
+	return Create(accessGroup, ACCESS_GROUP_MODEL)
 }
 
 func UpdateAccessGroup(id primitive.ObjectID, accessGroup *models.AccessGroup) (primitive.ObjectID, error) {
-	return Update(ACCESS_GROUP_MODEL, id, accessGroup) //nolint:typecheck
+	return Update(ACCESS_GROUP_MODEL, id, accessGroup)
 }
 
 func DeleteAccessGroup(id primitive.ObjectID) (*primitive.ObjectID, error) {
-	return Delete[*models.AccessGroup](ACCESS_GROUP_MODEL, id) //nolint:typecheck
+	return Delete[*models.AccessGroup](ACCESS_GROUP_MODEL, id)
 }
 
 func GetAccessGroups() ([]models.AccessGroup, error) {
-	return GetList[models.AccessGroup](ACCESS_GROUP_MODEL) //nolint:typecheck
+	return GetList[models.AccessGroup](ACCESS_GROUP_MODEL)
 }
 
 func GetAccessGroup(id primitive.ObjectID) (models.AccessGroup, error) {
-	return Get[models.AccessGroup](ACCESS_GROUP_MODEL, id) //nolint:typecheck
+	return Get[models.AccessGroup](ACCESS_GROUP_MODEL, id)
 }
 
 func AccessGroupesFindByIdRessource(ressourceName string, ids []primitive.ObjectID) ([]models.AccessGroup, error) {
@@ -40,5 +40,5 @@ func AccessGroupesFindByIdRessource(ressourceName string, ids []primitive.Object
 		},
 	}
 
-	return FindManyByAttributes[models.AccessGroup](ACCESS_GROUP_MODEL, attributes) //nolint:typecheck
+	return FindManyByAttributes[models.AccessGroup](ACCESS_GROUP_MODEL, attributes)
 }

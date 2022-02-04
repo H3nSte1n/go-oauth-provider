@@ -53,5 +53,12 @@ linters:
     - whitespace
     - wsl
 
+issues:
+  exclude-rules:
+    - path: oauth_provider/db/
+      linters:
+        - typecheck
+
+
 run:
   issues-exit-code: 1
