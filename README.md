@@ -1,2 +1,77 @@
-# go_oauth_provider
-WIP
+<h1>OAuth 2.0 Provider | Golang</h1>  
+<br>
+
+![Code-Style][code-style]
+[![MIT License][license-shield]][license-url]
+[![made-with-Go][made-with-go]][golang-url]
+
+<br><br>
+
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#build-with">Built Withk</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+
+## About The Project
+
+Hey guys, a couple of days ago I asked myself how an oauth provider works actuelly. So to get a deeper understanding I decided besides the research to create one themself. So this project is developed for research purposes only. But feel free to look around and have fun :).
+
+## Requirements
+* docker
+* go version >= 1.18
+
+## Setup
+The Setup is very simple. Just follow the two steps below:
+1. git clone ...
+> Pull the project from Github
+2. Removing the dist wording from the .env.dist filename
+   - .env.dist -> .env
+   - replace the dummy values
+
+2. docker-compose up
+> Start the Application.
+
+## Usage
+## Build With
+
+## Contact
+
+[![][link-name]](https://steinhauer.dev) [![][link-email]](mailto:hello@steinhauer.dev) [![][link-twitter]](https://twitter.com/H3nSte1n) [![][link-medium]](https://henrysteinhauer.medium.com/)
+
+## Acknowledgements
+
+- [Img Shields](https://shields.io)
+- [README Template](https://github.com/othneildrew/Best-README-Template/blob/master/README.md)
+
+<!--shield-styles-->
+
+[style-plastic]: https://img.shields.io/badge/plastic-83A603.svg?style=plastic
+[style-flat]: https://img.shields.io/badge/flat-83A603.svg?style=flat
+[style-flat-square]: https://img.shields.io/badge/flat_square-83A603.svg?style=flat-square
+[style-for-the-badge]: https://img.shields.io/badge/for_the_badge-83A603.svg?style=for-the-badge
+[style-social]: https://img.shields.io/badge/social-83A603.svg?style=social
+[link-name]: https://img.shields.io/badge/Henry_Steinhauer-469C90.svg?link=https://github.com/
+[link-email]: https://img.shields.io/badge/Mail-informational?style=flat&logo=Minutemailer&logoColor=white&color=469C90
+[link-twitter]: https://img.shields.io/badge/Twitter-informational?style=flat&logo=Twitter&logoColor=white&color=469C90
+[link-github]: https://img.shields.io/badge/Github-informational?style=flat&logo=GitHub&logoColor=white&color=469C90
+[link-medium]: https://img.shields.io/badge/Medium-informational?style=flat&logo=Medium&logoColor=white&color=469C90
+[logo-nuxt]: https://img.shields.io/badge/Nuxt-informational?style=flat&logo=nuxt.js&logoColor=white&color=469C90
+[logo-typescript]: https://img.shields.io/badge/Typescript-informational?style=flat&logo=typescript&logoColor=white&color=469C90
+[logo-express]: https://img.shields.io/badge/Express-informational?style=flat&logo=express&logoColor=white&color=469C90
+
+<!--infos-->
+[code-style]: https://github.com/H3nSte1n/go_oauth_provider/workflows/golangci-lint/badge.svg?style=flat
+[license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat
+[license-url]: https://github.com/H3nSte1n/go_oauth_provider/blob/master/LICENSE
+[made-with-go]: https://img.shields.io/badge/Made%20with-Go-1f425f.svg?style=flat
+[golang-url]: http://golang.org
