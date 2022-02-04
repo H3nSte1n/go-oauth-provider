@@ -4,6 +4,7 @@
 *.so
 *.dylib
 tmp/*
+oauth_provider/tmp/*
 .docker_data/*
 
 *.test
@@ -13,5 +14,4 @@ vendor/
 go.work
 
 .env
-
 settings.json
