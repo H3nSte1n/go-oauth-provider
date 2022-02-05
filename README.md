@@ -23,8 +23,7 @@
 </details>
 
 ## About The Project
-
-Hey guys, a couple of days ago I asked myself how an oauth provider works actuelly. So to get a deeper understanding I decided besides the research to create one themself. So this project is developed for research purposes only. But feel free to look around and have fun :).
+Hi guys, a few days ago I was wondering how an OAuth Provider actually works. In order to get a deeper understanding, besides doing research, I decided to create one myself. So this project is for research purposes only. But feel free to look around and have fun :).
 
 ## Requirements
 * docker
