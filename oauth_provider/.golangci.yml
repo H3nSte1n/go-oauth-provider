@@ -53,6 +53,7 @@ linters:
     - wsl
 
 issues:
+  # Generics lead to typecheck errors
   exclude-rules:
     - path: /
       linters:
