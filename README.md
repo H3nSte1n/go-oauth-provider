@@ -14,16 +14,16 @@
     </li>
     <li><a href="#requirements">Requirements</a></li>
     <li><a href="#setup">Setup</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#build-with">Built Withk</a></li>
+    <li><a href="#model-description">Model Description</a></li>
+    <li><a href="#erd">ERD</a></li>
+    <li><a href="#build-with">Built With</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
 ## About The Project
-
-Hey guys, a couple of days ago I asked myself how an oauth provider works actuelly. So to get a deeper understanding I decided besides the research to create one themself. So this project is developed for research purposes only. But feel free to look around and have fun :).
+Hi guys, a few days ago I was wondering how an OAuth Provider actually works. In order to get a deeper understanding, besides doing research, I decided to create one myself. So this project is for research purposes only. But feel free to look around and have fun :).
 
 ## Requirements
 * docker
@@ -40,7 +40,25 @@ The Setup is very simple. Just follow the two steps below:
 2. docker-compose up
 > Start the Application.
 
-## Usage
+## Model Description
+### User
+Each person who wants to use the Oauth provider must be a user.
+
+### AccessGroup
+The AccessGroup is responsible for giving each user certain rights in the oauth-provider. For example, there can be two AccessGroups. One for admins and one for normal users. The admin can add new users, add additional resources, manage access rights... while the normal user can only access their own credentials and the resources assigned to them.
+
+### Ressource
+Each resource simply represents an endpoint.
+
+### Scope
+With the scope, the user can further restrict the access of external services to individual resources. For example, a service can access a resource but only read it.
+
+### Credentials
+Each external service must create credentials. With these credentials, the service can create a token that allows access to the authorised resources.
+
+## ERD
+![Alt text here](doc/oauth-provider-erd.svg)
+
 ## Build With
 
 ## Contact
