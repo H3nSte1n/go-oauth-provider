@@ -16,6 +16,7 @@
     <li><a href="#setup">Setup</a></li>
     <li><a href="#model-description">Model Description</a></li>
     <li><a href="#erd">ERD</a></li>
+    <li><a href="#sequence-diagram">Sequence Diagram</a></li>
     <li><a href="#build-with">Built With</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -57,7 +58,10 @@ With the scope, the user can further restrict the access of external services to
 Each external service must create credentials. With these credentials, the service can create a token that allows access to the authorised resources.
 
 ## ERD
-![Alt text here](doc/oauth-provider-erd.svg)
+![oauth-provider-erd](doc/oauth-provider-erd.svg)
+
+## Sequence Diagram
+![successfull-request-external-service](doc/sequence-diagram.svg)
 
 ## Build With
 
