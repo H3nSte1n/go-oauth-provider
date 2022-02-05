@@ -46,7 +46,6 @@ linters:
     - structcheck
     - thelper
     - tparallel
-    - typecheck
     - unconvert
     - unparam
     - varcheck
@@ -54,8 +53,9 @@ linters:
     - wsl
 
 issues:
+  # Generics lead to typecheck errors
   exclude-rules:
-    - path: oauth_provider/db/
+    - path: /
       linters:
         - typecheck
 
