@@ -17,7 +17,7 @@
     <li><a href="#model-description">Model Description</a></li>
     <li><a href="#erd">ERD</a></li>
     <li><a href="#sequence-diagram">Sequence Diagram</a></li>
-    <li><a href="#build-with">Built With</a></li>
+    <li><a href="#tech-stack">Tech stack</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -63,7 +63,13 @@ Each external service must create credentials. With these credentials, the servi
 ## Sequence Diagram
 ![successfull-request-external-service](doc/sequence-diagram.svg)
 
-## Build With
+## Tech stack
+This section lists the main tech stack I used for this project.
+* [Go](https://go.dev/)
+* [Gin](https://github.com/gin-gonic/gin)
+* [MongoDB](https://www.mongodb.com/)
+* [Docker](https://www.docker.com/)
+
 
 ## Contact
 
