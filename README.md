@@ -97,8 +97,8 @@ This section lists the main tech stack I used for this project.
 [logo-express]: https://img.shields.io/badge/Express-informational?style=flat&logo=express&logoColor=white&color=469C90
 
 <!--infos-->
-[code-style]: https://github.com/H3nSte1n/go_oauth_provider/workflows/golangci-lint/badge.svg?style=flat
+[code-style]: https://github.com/H3nSte1n/go-oauth-provider/workflows/golangci-lint/badge.svg?style=flat
 [license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat
-[license-url]: https://github.com/H3nSte1n/go_oauth_provider/blob/master/LICENSE
+[license-url]: https://github.com/H3nSte1n/go-oauth-provider/blob/master/LICENSE
 [made-with-go]: https://img.shields.io/badge/Made%20with-Go-1f425f.svg?style=flat
 [golang-url]: http://golang.org
